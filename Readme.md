@@ -1,8 +1,13 @@
 # Official postgresql image inside of docker container
 
-Install:
+Clone:
 
 ``git clone https://github.com/codesshaman/docker_pgadmin4_from_image.git``
+
+
+Change data:
+
+Change your email address and password in .env befor build for security reasons.
 
 Build:
 
@@ -37,3 +42,5 @@ or
 ```
 http://127.0.0.1:8432
 ```
+
+And login with your email/password from .env
