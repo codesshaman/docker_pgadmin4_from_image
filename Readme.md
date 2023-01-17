@@ -37,10 +37,16 @@ or
 
 ``docker-compose up -d``
 
-### Connect in the browser:
+### Connect from browser:
 
 ```
 http://127.0.0.1:8432
 ```
 
 And login with your email/password from .env
+
+### Connect to bd from command line:
+
+```
+docker exec -it --user postgres postgresdb psql
+```
