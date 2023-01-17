@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  pgadmin4:
+    image: 'dpage/pgadmin4:2023-01-16-3'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
+    restart: unless-stopped
+    ports:
+      - "8432:80"
+    container_name: pgadmin4
