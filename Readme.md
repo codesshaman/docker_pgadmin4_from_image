@@ -50,3 +50,7 @@ And login with your email/password from .env
 ```
 docker exec -it --user postgres postgresdb psql
 ```
+
+Connect to database with container name "postgresdb":
+
+![connection](connect.png)
