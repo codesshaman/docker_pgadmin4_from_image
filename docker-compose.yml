@@ -9,6 +9,13 @@ services:
       # you can use the following option:
       # POSTGRES_HOST_AUTH_METHOD: "trust"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d:z
     ports:
       - "5432:5432"
     container_name: postgresdb
@@ -18,6 +25,11 @@ services:
       PGADMIN_DEFAULT_EMAIL: $PGADMIN_EMAIL
       PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8432 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
     ports:
       - "8432:80"
     container_name: pgadmin4
