@@ -25,11 +25,6 @@ services:
       PGADMIN_DEFAULT_EMAIL: $PGADMIN_EMAIL
       PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8432 || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
     ports:
       - "8432:80"
     container_name: pgadmin4
