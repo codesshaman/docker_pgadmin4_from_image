@@ -24,6 +24,9 @@ help:
 	@echo -e "$(WARN_COLOR)- make build			: Building configuration"
 	@echo -e "$(WARN_COLOR)- make conn			: Connect to database"
 	@echo -e "$(WARN_COLOR)- make down			: Stopping configuration"
+	@echo -e "$(WARN_COLOR)- make env			: Create environment file"
+	@echo -e "$(WARN_COLOR)- make git			: Set git user"
+	@echo -e "$(WARN_COLOR)- make push			: Push changes to repository"
 	@echo -e "$(WARN_COLOR)- make re			: Rebuild configuration"
 	@echo -e "$(WARN_COLOR)- make ps			: View configuration"
 	@echo -e "$(WARN_COLOR)- make clean			: Cleaning configuration$(NO_COLOR)"
@@ -40,9 +43,22 @@ down:
 	@printf "$(ERROR_COLOR)==== Stopping configuration ${name}... ====$(NO_COLOR)\n"
 	@docker-compose -f ./docker-compose.yml down
 
+env:
+	@printf "$(ERROR_COLOR)==== Create environment file for ${name}... ====$(NO_COLOR)\n"
+	@if [ -f .env ]; then \
+		rm .env; \
+	fi; \
+	cp .env.example .env
+
+git:
+	@bash scripts/gituser.sh
+
 re:	down
 	@printf "$(OK_COLOR)==== Rebuild configuration ${name}... ====$(NO_COLOR)\n"
 	@docker-compose -f ./docker-compose.yml up -d --build
+
+push:
+	@bash scripts/push.sh
 
 ps:
 	@printf "$(BLUE)==== View configuration ${name}... ====$(NO_COLOR)\n"
@@ -60,4 +76,4 @@ fclean:
 	# @docker network prune --force
 	# @docker volume prune --force
 
-.PHONY	: all help build conn down re ps clean fclean
+.PHONY	: all git help build conn down re ps clean fclean

@@ -9,6 +9,16 @@ Change data:
 
 Change your email address and password in .env befor build for security reasons.
 
+Create .env:
+
+``make env``
+
+or
+
+``cp .env.example .env``
+
+Change .env settings if necessary.
+
 Build:
 
 ``make build``
@@ -16,10 +26,6 @@ Build:
 or
 
 ``docker-compose up -d --build``
-
-Connect in pgadmin to:
-
-``http://your_host:5432``
 
 Down:
 
